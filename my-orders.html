@@ -1,0 +1,53 @@
+<div class="my-orders-page animate-fade-up">
+  <div class="header-section">
+    <h2>{{ isAdmin() ? 'إدارة جميع الطلبات' : 'طلباتكِ السابقة' }}</h2>
+    <p>تتبعي واستعرضي حالة الطلبات وتاريخ شرائكِ</p>
+  </div>
+
+  <div class="card table-card mt-4">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>رقم الطلب</th>
+            <th *ngIf="isAdmin()">العميلة</th>
+            <th>التاريخ</th>
+            <th>المبلغ الإجمالي</th>
+            <th>الحالة</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders()">
+            <td class="order-id">{{ order.orderNumber }}</td>
+            <td *ngIf="isAdmin()">{{ order.customerName || 'عميلة زائرة' }}</td>
+            <td>{{ order.createdAt | date:'yyyy-MM-dd HH:mm' }}</td>
+            <td class="order-price">{{ order.finalAmount | currencyYer }}</td>
+            <td>
+              <span class="status-badge" [attr.data-status]="order.status">
+                {{ order.status }}
+              </span>
+            </td>
+            <td class="actions">
+              <div class="action-dropdown" *ngIf="isAdmin()">
+                <select (change)="updateStatus(order.id, $any($event.target).value)" [value]="order.status">
+                  <option value="Pending">قيد الانتظار</option>
+                  <option value="Processing">جاري التجهيز</option>
+                  <option value="Shipped">تم الشحن</option>
+                  <option value="Delivered">تم التوصيل</option>
+                  <option value="Cancelled">ملغي</option>
+                </select>
+              </div>
+              <button class="btn btn-outline btn-sm" [routerLink]="['/dashboard/order-details', order.id]" disabled>
+                📄 التفاصيل
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="orders().length === 0">
+            <td colspan="6" style="text-align: center; padding: 3rem;">لا تمتلكين أي طلبات مسجلة حالياً.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

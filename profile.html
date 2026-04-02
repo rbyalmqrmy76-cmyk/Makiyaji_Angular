@@ -1,0 +1,64 @@
+<div class="profile-page animate-fade-up">
+  <div class="header-section">
+    <div class="title-group">
+      <h2>الملف الشخصي</h2>
+      <p>يمكنكِ إدارة بياناتكِ وصورتكِ الشخصية هنا</p>
+    </div>
+  </div>
+
+  <div class="card profile-card mt-4">
+    <div class="profile-grid">
+      <div class="photo-section">
+        <div class="photo-wrapper">
+          <img [src]="userInfo().profileImage || 'assets/images/placeholder-user.png'" alt="Avatar">
+          <div class="badge-role">{{ userInfo().role }}</div>
+        </div>
+        <div class="photo-action mt-4">
+          <label class="btn btn-outline btn-sm">
+            📷 تغيير الصورة
+            <input type="text" [(ngModel)]="userInfo().profileImage" (ngModelChange)="saveProfile()" hidden>
+          </label>
+        </div>
+      </div>
+      
+      <div class="info-section">
+        <form (submit)="saveProfile(); $event.preventDefault()" class="profile-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>الإسم الكامل</label>
+              <input type="text" [(ngModel)]="userInfo().fullName" name="fullName">
+            </div>
+            <div class="form-group">
+              <label>اسم المستخدم (لا يمكن تغييره)</label>
+              <input type="text" [value]="userInfo().username" disabled class="disabled">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>البريد الإلكتروني (أساسي)</label>
+              <input type="email" [value]="userInfo().email" disabled class="disabled">
+            </div>
+            <div class="form-group">
+              <label>رقم الهاتف</label>
+              <input type="tel" [(ngModel)]="userInfo().phone" name="phone">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>العنوان الحقيقي</label>
+            <input type="text" [(ngModel)]="userInfo().address" name="address">
+          </div>
+          
+          <div class="form-footer mt-4">
+            <button class="btn btn-primary btn-lg">💾 حفظ الإعدادات</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="card settings-card mt-4">
+    <h3>إعدادات الأمان</h3>
+    <p>لحماية حسابكِ، ننصح بتغيير كلمة المرور بشكل دوري.</p>
+    <button class="btn btn-outline btn-sm mt-3" disabled>تغيير كلمة المرور (قريباً!)</button>
+  </div>
+</div>

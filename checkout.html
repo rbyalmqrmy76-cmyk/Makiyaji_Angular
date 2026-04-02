@@ -1,0 +1,102 @@
+<app-breadcrumb [items]="breadcrumbList"></app-breadcrumb>
+
+<div class="checkout-page animate-fade-up">
+  <div class="container section">
+    <div class="checkout-header">
+      <h1>إتمام الطلب</h1>
+      <p>يرجى إكمال بيانات الشحن لإرسال طلبكِ فوراً</p>
+    </div>
+
+    <!-- Empty State Redirect -->
+    <div *ngIf="cartService.items().length === 0" class="empty-checkout">
+      <h2>لا توجد منتجات في السلة!</h2>
+      <button class="btn btn-primary" routerLink="/products">العودة للتسوق</button>
+    </div>
+
+    <div class="checkout-grid" *ngIf="cartService.items().length > 0">
+      <!-- Form Column -->
+      <div class="shipping-column">
+        <div class="card shipping-card">
+          <h3 class="section-title">بيانات الشحن والعنوان</h3>
+          <form (submit)="$event.preventDefault()" class="checkout-form">
+            <div class="form-group">
+              <label>الاسم الكامل المستلم</label>
+              <input type="text" [(ngModel)]="shippingInfo.fullName" name="fullName" placeholder="مثلاً: ربيع المقرمي">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>رقم الهاتف للتواصل</label>
+                <input type="tel" [(ngModel)]="shippingInfo.phone" name="phone" placeholder="7XXXXXXXX">
+              </div>
+              <div class="form-group">
+                <label>المدينة / المنطقة</label>
+                <select [(ngModel)]="shippingInfo.city" name="city">
+                  <option value="التربة">التربة</option>
+                  <option value="تعز - المدينة">تعز - المدينة</option>
+                  <option value="صبر">صبر</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>العنوان بالتفصيل (الحارة / الشارع / معلم مميز)</label>
+              <textarea [(ngModel)]="shippingInfo.address" name="address" rows="3" placeholder="مثلاً: حارة السلام، خلف مدرسة الوحدة"></textarea>
+            </div>
+            <div class="form-group">
+              <label>ملاحظات إضافية (اختياري)</label>
+              <input type="text" [(ngModel)]="shippingInfo.notes" name="notes" placeholder="مثلاً: التوصيل بعد الساعة 4 عصراً">
+            </div>
+          </form>
+        </div>
+
+        <div class="card payment-card">
+          <h3 class="section-title">طريقة الدفع</h3>
+          <div class="payment-method active">
+            <span class="icon">💵</span>
+            <div class="method-info">
+              <strong>الدفع عند الاستلام</strong>
+              <p>يتم دفع المبلغ نقداً للمندوب عند استلام الطلبة.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary Column -->
+      <div class="summary-column">
+        <div class="card summary-card sticky-summary">
+          <h3 class="section-title">ملخص طلبكِ</h3>
+          <div class="items-preview">
+            <div class="item-row" *ngFor="let item of cartService.items()">
+              <div class="item-name-qty">
+                <span>{{ item.productName }}</span>
+                <span class="qty">× {{ item.quantity }}</span>
+              </div>
+              <span class="price-row">{{ (item.price * item.quantity) | currencyYer }}</span>
+            </div>
+          </div>
+
+          <div class="summary-totals">
+            <div class="summary-line">
+              <span>المجموع الفرعي:</span>
+              <span>{{ cartService.totalPrice() | currencyYer }}</span>
+            </div>
+            <div class="summary-line">
+              <span>رسوم التوصيل (التربة):</span>
+              <span class="free">مجاني</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-line total-line">
+              <span>الإجمالي الكلي:</span>
+              <span>{{ cartService.totalPrice() | currencyYer }}</span>
+            </div>
+
+            <button class="btn btn-primary btn-full btn-lg mt-4" 
+                    [disabled]="isProcessing()" 
+                    (click)="placeOrder()">
+              {{ isProcessing() ? 'جاري إرسال الطلب...' : 'تأكيد وطلب الآن' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

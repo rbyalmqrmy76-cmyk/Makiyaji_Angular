@@ -1,0 +1,42 @@
+<div class="manage-users-page animate-fade-up">
+  <div class="header-section">
+    <h2>إدارة المستخدمين والصلاحيات</h2>
+    <p>تحكمي في صلاحيات المندوبين والمشرفين وحالة حساباتهم</p>
+  </div>
+
+  <div class="card table-card mt-4">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>الإسم الكامل</th>
+            <th>البريد الإلكتروني</th>
+            <th>الدور</th>
+            <th>الحالة</th>
+            <th>تاريخ الانضمام</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users()">
+            <td><strong>{{ user.fullName }}</strong></td>
+            <td>{{ user.email }}</td>
+            <td><span class="role-badge">{{ user.role }}</span></td>
+            <td>
+              <span class="status-badge" [class.active]="user.isActive" [class.blocked]="!user.isActive">
+                {{ user.isActive ? 'نشط' : 'محظور' }}
+              </span>
+            </td>
+            <td>{{ user.createdAt | date:'yyyy-MM-dd' }}</td>
+            <td class="actions">
+              <button class="btn btn-sm" [class.btn-danger]="user.isActive" [class.btn-success]="!user.isActive" 
+                      (click)="toggleUserStatus(user.id)">
+                {{ user.isActive ? '🔒 حظر' : '🔓 تفعيل' }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

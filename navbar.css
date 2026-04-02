@@ -1,0 +1,143 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  padding: 1.2rem 0;
+  box-shadow: var(--shadow-sm);
+  transition: padding 0.3s ease;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.logo-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text {
+  font-family: var(--font-main); /* Now using Tajawal but with bold/style font */
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.logo-sub {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.navbar-links li a {
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  position: relative;
+  padding: 5px 0;
+}
+
+.navbar-links li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.navbar-links li a:hover::after,
+.navbar-links li a.active::after {
+  width: 100%;
+}
+
+.navbar-links li a.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.cart-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-count {
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 7px;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login-btn {
+  padding: 0.5rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+@media (max-width: 992px) {
+  .navbar-links {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    width: 250px; /* Simplified for cleaner look on mobile */
+    height: auto;
+    background: white;
+    flex-direction: column;
+    padding: 2rem;
+    transition: right 0.4s ease;
+    box-shadow: var(--shadow-md);
+    border-radius: 0 0 0 15px;
+  }
+
+  .navbar-links.mobile-active {
+    right: 0;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+}

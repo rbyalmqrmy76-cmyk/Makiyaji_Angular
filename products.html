@@ -1,0 +1,44 @@
+<app-breadcrumb [items]="breadcrumbList"></app-breadcrumb>
+
+<div class="products-page animate-fade-up">
+  <div class="container">
+    <div class="page-header">
+      <h1>منتجاتنا الفاخرة</h1>
+      <p>اكتشفي الجمال في كل تفصيلة</p>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="filters-container">
+      <div class="search-box">
+        <input type="text" placeholder="ابحثي عن منتج أو ماركة..." [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)">
+        <span class="search-icon">🔍</span>
+      </div>
+
+      <div class="category-filters">
+        <button *ngFor="let cat of categories" 
+                class="filter-btn" 
+                [class.active]="selectedCategory() === cat"
+                (click)="setCategory(cat)">
+          {{ cat }}
+        </button>
+      </div>
+
+      <div class="price-filter">
+        <label>السعر حتى: {{ selectedPriceRange() }} ريال</label>
+        <input type="range" min="0" max="100000" step="1000" [ngModel]="selectedPriceRange()" (ngModelChange)="selectedPriceRange.set($event)">
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-3 product-grid" *ngIf="filteredProducts().length > 0">
+      <app-product-card *ngFor="let p of filteredProducts()" [product]="p"></app-product-card>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="filteredProducts().length === 0">
+      <div class="empty-icon">💄</div>
+      <h2>عذراً، لم نجد نتائج!</h2>
+      <p>جربي البحث بكلمات أخرى أو تغيير الفلتر.</p>
+    </div>
+  </div>
+</div>

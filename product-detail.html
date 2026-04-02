@@ -1,0 +1,63 @@
+<app-breadcrumb [items]="breadcrumbList"></app-breadcrumb>
+
+<div class="product-detail-page animate-fade-up" *ngIf="product()">
+  <div class="container section">
+    <div class="detail-grid">
+      <!-- Image Column -->
+      <div class="detail-image">
+        <div class="image-frame">
+          <img [src]="product()?.images?.[0] || 'assets/images/placeholder.png'" [alt]="product()?.name">
+        </div>
+      </div>
+
+      <!-- Info Column -->
+      <div class="detail-info">
+        <div class="info-header">
+          <span class="info-category">{{ product()?.categoryName }}</span>
+          <h1>{{ product()?.name }}</h1>
+          <div class="info-brand" *ngIf="product()?.brand">الماركة: <strong>{{ product()?.brand }}</strong></div>
+          <div class="info-rating">
+            <app-star-rating [rating]="product()?.averageRating || 0"></app-star-rating>
+          </div>
+        </div>
+
+        <div class="info-price">
+          <span class="current-price" [class.discounted]="product()?.discountPrice">{{ (product()?.discountPrice || product()?.price || 0) | currencyYer }}</span>
+          <span class="old-price" *ngIf="product()?.discountPrice">{{ (product()?.price || 0) | currencyYer }}</span>
+        </div>
+
+        <div class="info-desc">
+          <p>{{ product()?.description || 'لا يوجد وصف متاح لهذا المنتج حالياً.' }}</p>
+        </div>
+
+        <div class="info-actions">
+          <div class="quantity-selector">
+            <button (click)="updateQty(-1)">-</button>
+            <span class="qty-num">{{ quantity() }}</span>
+            <button (click)="updateQty(1)">+</button>
+          </div>
+          <button class="btn btn-primary btn-lg btn-add" (click)="addToCart()" [disabled]="product()?.stockQuantity === 0">
+            {{ product()?.stockQuantity === 0 ? 'نفذت الكمية' : 'أضفي للسلة' }}
+          </button>
+        </div>
+
+        <div class="additional-info">
+          <div class="info-item">
+            <span class="icon">✨</span>
+            <div>
+              <strong>الأصالة مضمونة</strong>
+              <p>كل منتجاتنا أصلية 100% ومن ماركات عالمية.</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="icon">🚛</span>
+            <div>
+              <strong>توصيل سريع</strong>
+              <p>توصيل لجميع أحياء التربة ومحافظة تعز.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.page-container {
+  min-height: calc(100vh - 80px - 400px); /* Adjust based on navbar/footer height roughly */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure global fonts are applied */
+:host {
+  display: block;
+}

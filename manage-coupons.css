@@ -1,0 +1,78 @@
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.coupon-code {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-family: monospace;
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.discount-txt {
+  color: #10b981;
+  font-size: 1.2rem;
+}
+
+.status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.active-badge { background: #ecfdf5; color: #059669; }
+.expire-badge { background: #f3f4f6; color: #6b7280; }
+
+.table-card {
+  padding: 1.5rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  text-align: right;
+  padding: 1.2rem 1rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid #eee;
+  font-size: 0.85rem;
+}
+
+.data-table td {
+  padding: 1.2rem 1rem;
+  border-bottom: 1px solid #f8f8f8;
+  vertical-align: middle;
+}
+
+.actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.btn-icon {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  cursor: pointer;
+}
+
+.btn-icon.delete:hover { background: #fee2e2; border-color: #ef4444; }
+
+@media (max-width: 768px) {
+  .data-table { display: block; overflow-x: auto; }
+}

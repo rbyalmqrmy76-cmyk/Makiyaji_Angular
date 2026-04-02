@@ -1,0 +1,85 @@
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mini-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.role-badge {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  padding: 0.2rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
+.active-dot { background: #10b981; }
+.block-dot { background: #ef4444; }
+
+.table-card {
+  padding: 1.5rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  text-align: right;
+  padding: 1.2rem 1rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid #eee;
+  font-size: 0.85rem;
+}
+
+.data-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f8f8f8;
+  vertical-align: middle;
+}
+
+.actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.btn-icon {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  cursor: pointer;
+}
+
+.btn-icon.edit:hover { background: #e0f2f1; border-color: #00897b; }
+.btn-icon.delete:hover { background: #fee2e2; border-color: #ef4444; }
+
+@media (max-width: 768px) {
+  .data-table { display: block; overflow-x: auto; }
+}

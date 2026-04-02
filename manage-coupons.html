@@ -1,0 +1,62 @@
+<div class="manage-coupons-page animate-fade-up">
+  <div class="header-section">
+    <h2>إدارة كوبونات الخصم</h2>
+    <p>تحكمي في العروض الترويجية وأكواد الخصم الخاصة بمتجر مكياجي</p>
+  </div>
+
+  <div class="card form-card mt-4">
+    <h3>إضافة كود خصم جديد</h3>
+    <form (submit)="addCoupon(); $event.preventDefault()" class="coupon-form mt-3">
+      <div class="form-row">
+        <div class="form-group">
+          <label>رمز الكود (مثلاً: BEAUTY26)</label>
+          <input type="text" [(ngModel)]="newCoupon.code" name="code" placeholder="ENTER_CODE" required>
+        </div>
+        <div class="form-group">
+          <label>نسبة الخصم (%)</label>
+          <input type="number" [(ngModel)]="newCoupon.discountPercentage" name="discountPercentage" placeholder="20" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>تاريخ الانتهاء</label>
+          <input type="date" [(ngModel)]="newCoupon.expiryDate" name="expiryDate" required>
+        </div>
+        <div class="form-group">
+          <label>الحد الأدنى للطلب (اختياري)</label>
+          <input type="number" [(ngModel)]="newCoupon.minAmount" name="minAmount" placeholder="10000">
+        </div>
+      </div>
+      <button class="btn btn-primary mt-3">✨ إنشاء الكوبون الآن</button>
+    </form>
+  </div>
+
+  <div class="card table-card mt-4">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>كود الخصم</th>
+            <th>النسبة</th>
+            <th>تنتهي في</th>
+            <th>الحد الأدنى</th>
+            <th>الحالة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let coupon of coupons()">
+            <td class="code-txt"><strong>{{ coupon.code }}</strong></td>
+            <td>{{ coupon.discountPercentage }}%</td>
+            <td>{{ coupon.expiryDate | date:'yyyy-MM-dd' }}</td>
+            <td>{{ (coupon.minAmount || 0) | currency:'YER ' }}</td>
+            <td>
+              <span class="status-badge" [class.active]="coupon.isActive" [class.expired]="!coupon.isActive">
+                {{ coupon.isActive ? 'نشط' : 'غير نشط' }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

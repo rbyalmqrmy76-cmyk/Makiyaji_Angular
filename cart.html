@@ -1,0 +1,80 @@
+<app-breadcrumb [items]="breadcrumbList"></app-breadcrumb>
+
+<div class="cart-page animate-fade-up">
+  <div class="container section">
+    <div class="cart-header">
+      <h1>سلة المشتريات</h1>
+      <p>تبقى لكِ خطوة واحدة لتكتمل رحلة الجمال</p>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-cart" *ngIf="cartService.items().length === 0">
+      <div class="empty-icon">🛍️</div>
+      <h2>سلتكِ فارغة حالياً!</h2>
+      <p>اكتشفي منتجاتنا الفاخرة وأضيفيها إلى سلتكِ.</p>
+      <button class="btn btn-primary btn-lg" routerLink="/products">تسوقي الآن</button>
+    </div>
+
+    <!-- Content -->
+    <div class="cart-grid" *ngIf="cartService.items().length > 0">
+      <!-- Items List -->
+      <div class="cart-items-list">
+        <div class="cart-item card" *ngFor="let item of cartService.items()">
+          <div class="item-img">
+            <img [src]="item.imageUrl || ''" [alt]="item.productName">
+          </div>
+          <div class="item-details">
+            <h3 class="item-name">{{ item.productName }}</h3>
+            <div class="item-price">{{ item.price | currencyYer }}</div>
+          </div>
+          <div class="item-quantity">
+            <div class="quantity-box">
+              <button (click)="updateQuantity(item.id, -1)">-</button>
+              <span>{{ item.quantity }}</span>
+              <button (click)="updateQuantity(item.id, 1)">+</button>
+            </div>
+          </div>
+          <div class="item-total">
+            {{ (item.price * item.quantity) | currencyYer }}
+          </div>
+          <div class="item-remove">
+            <button class="remove-btn" (click)="removeItem(item.id)">×</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Sidebar -->
+      <div class="cart-summary">
+        <div class="summary-card card sticky-summary">
+          <h3>ملخص الطلب</h3>
+          <div class="summary-row">
+            <span>عدد المنتجات:</span>
+            <strong>{{ cartService.totalQuantity() }}</strong>
+          </div>
+          <div class="summary-row">
+            <span>المجموع الفرعي:</span>
+            <strong>{{ cartService.totalPrice() | currencyYer }}</strong>
+          </div>
+          <div class="summary-row">
+            <span>التوصيل:</span>
+            <strong class="free">مجاني</strong>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-row total">
+            <span>الإجمالي النهائي:</span>
+            <strong>{{ cartService.totalPrice() | currencyYer }}</strong>
+          </div>
+
+          <button class="btn btn-primary btn-full btn-lg checkout-btn" routerLink="/checkout">
+            إتمام الشراء
+          </button>
+          
+          <div class="secure-checkout">
+            <span>🛡️ تسوق آمن 100%</span>
+            <span>💳 الدفع عند الاستلام</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

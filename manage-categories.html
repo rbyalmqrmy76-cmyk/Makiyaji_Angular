@@ -1,0 +1,37 @@
+<div class="manage-categories-page animate-fade-up">
+  <div class="header-section">
+    <div class="title-group">
+      <h2>إدارة فئات المنتجات</h2>
+      <p>تنظيم المتجر حسب الفئات يسهل رحلة العميلات في الوصول لمنتجاتكِ</p>
+    </div>
+    <button class="btn btn-primary" (click)="addCategory()">
+      ➕ إضافة فئة جديدة
+    </button>
+  </div>
+
+  <div class="card table-card mt-4">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>الرمز</th>
+            <th>اسم الفئة</th>
+            <th>عدد المنتجات المرتبطة</th>
+            <th>الإجراءات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cat of categories()">
+            <td><span class="cat-icon">{{ cat.icon }}</span></td>
+            <td><strong>{{ cat.name }}</strong></td>
+            <td><span class="count-badge">{{ cat.count }} منتجات</span></td>
+            <td class="actions">
+              <button class="btn-icon edit" title="تعديل">✏️</button>
+              <button class="btn-icon delete" title="حذف">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

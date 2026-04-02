@@ -1,0 +1,75 @@
+<div class="add-product-page animate-fade-up">
+  <div class="header-section">
+    <div class="title-group">
+      <h2>إضافة منتج فاخر جديد</h2>
+      <p>املئي البيانات أدناه ليظهر منتجكِ لعميلات المتجر</p>
+    </div>
+    <button class="btn btn-outline" routerLink="/dashboard/my-products">
+      إلغاء والعودة
+    </button>
+  </div>
+
+  <div class="card form-card mt-4">
+    <form (submit)="saveProduct(); $event.preventDefault()" class="product-form">
+      <div class="form-grid">
+        <!-- Main Info -->
+        <div class="form-section">
+          <h3>بيانات المنتج الأساسية</h3>
+          <div class="form-group">
+            <label>اسم المنتج بالعربي</label>
+            <input type="text" [(ngModel)]="product.name" name="name" placeholder="مثلاً: أحمر شفاه مخملي">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>الماركة / براند</label>
+              <input type="text" [(ngModel)]="product.brand" name="brand" placeholder="MAC, Dior, etc.">
+            </div>
+            <div class="form-group">
+              <label>الفئة</label>
+              <select [(ngModel)]="product.categoryId" name="categoryId">
+                <option *ngFor="let cat of categories()" [value]="cat.id">{{ cat.name }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>السعر (ريال يمني)</label>
+              <input type="number" [(ngModel)]="product.price" name="price" placeholder="0.00">
+            </div>
+            <div class="form-group">
+              <label>سعر الخصم (اختياري)</label>
+              <input type="number" [(ngModel)]="product.discountPrice" name="discountPrice" placeholder="0.00">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>الكمية المتوفرة (Stock)</label>
+            <input type="number" [(ngModel)]="product.stockQuantity" name="stockQuantity" placeholder="10">
+          </div>
+        </div>
+
+        <!-- Image & Description -->
+        <div class="form-section">
+          <h3>الصور والوصف</h3>
+          <div class="form-group">
+            <label>رابط صورة المنتج (URL)</label>
+            <input type="text" [(ngModel)]="product.mainImage" name="mainImage" placeholder="https://...">
+          </div>
+          <div class="image-preview-box">
+            <img *ngIf="product.mainImage; else noImg" [src]="product.mainImage" alt="Product Preview">
+            <ng-template #noImg>
+              <div class="no-img">معاينة الصورة ستظهر هنا عند وضع الرابط</div>
+            </ng-template>
+          </div>
+          <div class="form-group mt-3">
+            <label>وصف المنتج بالتفصيل</label>
+            <textarea [(ngModel)]="product.description" name="description" rows="5" placeholder="اكتبي مميزات المنتج وطريقة استخدامه..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-footer mt-5">
+        <button type="submit" class="btn btn-primary btn-lg">✨ حفظ المنتج ونشره</button>
+      </div>
+    </form>
+  </div>
+</div>

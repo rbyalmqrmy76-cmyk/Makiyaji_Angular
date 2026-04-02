@@ -1,0 +1,52 @@
+<div class="my-products-page animate-fade-up">
+  <div class="header-section">
+    <div class="title-group">
+      <h2>إدارة منتجاتكِ</h2>
+      <p>يمكنكِ هنا عرض وتعديل كل المنتجات المعروضة في المتجر</p>
+    </div>
+    <button class="btn btn-primary" routerLink="/dashboard/add-product">
+      ✨ إضافة منتج جديد
+    </button>
+  </div>
+
+  <div class="card table-card mt-4">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>الصورة</th>
+            <th>اسم المنتج</th>
+            <th>الفئة</th>
+            <th>الماركة</th>
+            <th>السعر</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products()">
+            <td>
+              <div class="prod-img">
+                <img [src]="product.images[0] || 'assets/images/placeholder.png'" [alt]="product.name">
+              </div>
+            </td>
+            <td><strong>{{ product.name }}</strong></td>
+            <td><span class="badge">{{ product.categoryName }}</span></td>
+            <td>{{ product.brand || '-' }}</td>
+            <td><strong class="price-txt">{{ (product.discountPrice || product.price) | currencyYer }}</strong></td>
+            <td class="actions">
+              <button class="btn-icon edit" [routerLink]="['/dashboard/edit-product', product.id]" title="تعديل">✏️</button>
+              <button class="btn-icon delete" (click)="deleteProduct(product.id)" title="حذف">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="products().length === 0" class="empty-state">
+      <div class="icon">💄</div>
+      <h3>لا توجد منتجات حالياً!</h3>
+      <p>ابدئي بإضافة أول منتج لمتجركِ الآن.</p>
+    </div>
+  </div>
+</div>

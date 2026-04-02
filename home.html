@@ -1,0 +1,66 @@
+<section class="hero animate-fade-up">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <span class="hero-badge">تشكيلة الربيع 2026</span>
+      <h1>لأجلكِ أنتِ.. <br><span class="highlight">منبع الجمال</span> والأناقة</h1>
+      <p>اكتشفي أحدث صيحات المكياج عالميًا بلمسة عربية أصيلة. نوفر لكِ أفضل الماركات والمنتجات للعناية ببشرتكِ وجمالكِ.</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary btn-lg" routerLink="/products">تسوقي الآن</button>
+        <button class="btn btn-outline btn-lg" routerLink="/about">اكتشفي المزيد</button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="image-wrapper-arch">
+        <img src="assets/logo-mkiajy-hero.png" alt="Mkiajy Luxury Branding" class="hero-emblem-img">
+        <div class="accent-box-gold"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section categories-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>تسوقي حسب التصنيف</h2>
+      <p>اختاري ما يناسبكِ من تشكيلتنا المتنوعة</p>
+    </div>
+    
+    <div class="grid grid-cols-4">
+      <div class="category-card card" *ngFor="let cat of categories()" [routerLink]="['/products']" [queryParams]="{categoryId: cat.id}">
+        <div class="cat-img-wrapper" *ngIf="cat.imageUrl">
+          <img [src]="cat.imageUrl" [alt]="cat.name">
+        </div>
+        <div class="cat-icon" *ngIf="!cat.imageUrl">✨</div>
+        <h3>{{ cat.name }}</h3>
+        <p>{{ cat.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section featured-products">
+  <div class="container">
+    <div class="section-header">
+      <h2>الأكثر مبيعاً</h2>
+      <p>المنتجات التي خطفت الأنظار هذا الموسم</p>
+    </div>
+    
+    <div class="grid grid-cols-4">
+      <app-product-card *ngFor="let product of featuredProducts()" [product]="product"></app-product-card>
+    </div>
+    
+    <div class="text-center mt-8">
+      <button class="btn btn-outline btn-lg" routerLink="/products">عرض جميع المنتجات</button>
+    </div>
+  </div>
+</section>
+
+<section class="section promo-banner">
+  <div class="container promo-content">
+    <div class="promo-inner">
+      <h2>خصم يصل إلى 30%</h2>
+      <p>على جميع مستحضرات العناية بالبشرة لفترة محدودة</p>
+      <button class="btn btn-primary">استخدمي الكود: BEAUTY26</button>
+    </div>
+  </div>
+</section>

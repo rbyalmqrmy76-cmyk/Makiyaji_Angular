@@ -1,0 +1,51 @@
+<div class="reports-page animate-fade-up">
+  <div class="header-section">
+    <h2>التقارير والإحصائيات التحليلية</h2>
+    <p>تحليل دقيق لأداء المبيعات والمنتجات الأكثر طلباً في "منبع الجمال"</p>
+  </div>
+
+  <div class="summary-cards">
+    <div class="summary-card card">
+      <div class="card-label">إجمالي العائد المادي</div>
+      <div class="card-value">{{ dashboardStats().totalRevenue | currencyYer }}</div>
+      <div class="card-trend up">↗ 25% نمو هذا الشهر</div>
+    </div>
+    <div class="summary-card card">
+      <div class="card-label">عدد الطلبات المكتملة</div>
+      <div class="card-value">{{ dashboardStats().totalOrders }}</div>
+      <div class="card-trend up">+8 طلبات جديدة اليوم</div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 mt-6">
+    <div class="card table-card">
+      <div class="card-header">
+        <h3>أفضل 5 منتجات مبيعاً ✨</h3>
+        <p>المنتجات التي تحقق العائد الأكبر</p>
+      </div>
+      <div class="table-container mt-4">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>المنتج</th>
+              <th>التصنيف</th>
+              <th>إجمالي المبيعات</th>
+              <th>العائد المادي</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of topProducts()">
+              <td><strong>{{ product.name }}</strong></td>
+              <td>{{ product.categoryName }}</td>
+              <td>{{ product.totalSales || 0 }} وحدة</td>
+              <td class="revenue-txt">{{ (product.totalSales || 0) * (product.discountPrice || product.price) | currencyYer }}</td>
+            </tr>
+            <tr *ngIf="topProducts().length === 0">
+              <td colspan="4" style="text-align: center; padding: 2rem;">لا تتوفر إحصائيات بيع لهذا الموسم حتى الآن.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

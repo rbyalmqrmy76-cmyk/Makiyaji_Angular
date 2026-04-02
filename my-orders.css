@@ -1,0 +1,64 @@
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.table-card {
+  padding: 1.5rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  text-align: right;
+  padding: 1.2rem 1rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid #eee;
+  font-size: 0.85rem;
+}
+
+.data-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f8f8f8;
+  vertical-align: middle;
+}
+
+.price-txt {
+  color: var(--primary-color);
+  font-weight: 800;
+}
+
+.status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.status-green { background: #ecfdf5; color: #059669; }
+.status-orange { background: #fff7ed; color: #d97706; }
+.status-red { background: #fef2f2; color: #dc2626; }
+
+.status-select {
+  padding: 0.5rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  background-color: #fafafa;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.status-select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .data-table { display: block; overflow-x: auto; }
+}
